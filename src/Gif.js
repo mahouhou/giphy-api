@@ -19,7 +19,7 @@ class Gif extends Component {
 				className={`grid-item video ${loaded && 'loaded'}`}
 				autoPlay
 				loop
-				src={this.props.images.original.mp4}
+				src={images.original.mp4}
 				//This checks if the gif has loaded yet and sets the state to true when it has
 				onLoadedData={() => this.setState({loaded: true})}
 			/>

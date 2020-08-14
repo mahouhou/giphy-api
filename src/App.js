@@ -1,5 +1,3 @@
-//Finished video 23
-
 import React, {Component} from 'react';
 //Import loader image to use in UserHint component
 import loader from './images/loader.svg'
@@ -23,7 +21,7 @@ const Header = ({clearSearch, hasResults}) => (
 		otherwise display h1 Jiffy */}
 		{hasResults ? (
 			<button onClick={clearSearch}>
-				<img src={clearButton} />
+				<img src={clearButton} alt="Clear"/>
 			</button>
 		) : (
 		 	<h1 className="title">Jiffy</h1>
@@ -35,7 +33,7 @@ const UserHint = ({loading, hintText}) => (
 	<div className="user-hint">
 		{/* This is a ternary operator.
 		Is it loading? If yes, load the spinner, if not, load the hintText. */}
-		{loading ? <img className="block mx-auto" src={loader} /> : hintText}
+		{loading ? <img className="block mx-auto" src={loader} alt="Loading" /> : hintText}
 	</div>
 	)
 
