@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
+import Gif from './Gif'
 //Import loader image to use in UserHint component
 import loader from './images/loader.svg'
-//Import Gif component
-import Gif from './Gif'
-//Import close button
+//Import close button image
 import clearButton from './images/close-icon.svg'
 
 //Function that will be used to choose a random gif
@@ -13,27 +12,26 @@ const randomChoice = arr => {
 	return arr[randIndex];
 };
 
-//Pick up clearSearch and hasResults props
-//We can pass functions as well as numbers, strings. arrays etc.
+//Pass clearSearch and hasResults props
 const Header = ({clearSearch, hasResults}) => (
 	<div className="header grid">
-		{/* If we have results inside gifs array, show close button
-		otherwise display h1 Jiffy */}
+		{/* If hasResults is true i.e. contains data, show Clear button,
+		otherwise display title */}
 		{hasResults ? (
 			<button onClick={clearSearch}>
 				<img src={clearButton} alt="Clear"/>
-			</button>
-		) : (
-		 	<h1 className="title">Jiffy</h1>
-		)}
+			</button>) : (
+		 	<h1 className="title">Jiffy</h1>)}
 	</div>
 );
 
 const UserHint = ({loading, hintText}) => (
 	<div className="user-hint">
-		{/* This is a ternary operator.
-		Is it loading? If yes, load the spinner, if not, load the hintText. */}
-		{loading ? <img className="block mx-auto" src={loader} alt="Loading" /> : hintText}
+		{/* Check loading state.
+		If true, load the spinner, if not, load hintText. */}
+		{loading ? 
+			<img className="block mx-auto" src={loader} alt="Loading" /> : 
+			hintText}
 	</div>
 	)
 
@@ -42,13 +40,9 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			//Set default state for loading
 			loading: false,
-			//Default state is empty
 			searchTerm: '',
-			//Set state of hintText
 			hintText: '',
-			//An empty array
 			gifs: []
 
 		};
@@ -77,7 +71,7 @@ class App extends Component {
 			//If it is, it will throw an error and stop the code from proceeding
 			//It will instead be handled by the catch
 			if (!data.length) {
-				throw `Nothing found for ${searchTerm}`
+				throw new Error(`Nothing found for ${searchTerm}`)
 			}
 			
 			//randomGif calls the randomChoice function
@@ -123,7 +117,7 @@ class App extends Component {
 		//we have created a 'controlled input'
 		//Get the previous state and properties
 		this.setState((prevState, props) => ({
-			//Spread them out?
+			//Get all of the previous state
 			...prevState,
 			//Overwrite the previous state with the new state
 			//which is our search value
@@ -146,52 +140,42 @@ class App extends Component {
 		}
 	};
 
-	//Here we reset the states to their default values
+	//Called when user hits Clear button
 	clearSearch = () => {
+		//this refers to App state
+		//Reset states to default values
 		this.setState((prevState, props) => ({
 			...prevState,
 			searchTerm: '',
 			hintText: '',
 			gifs: []
 		}));
-		//Here we focus the cursor back on the input
+		//this refers to App textInput
+		//Focus cursor back on text input
 		this.textInput.focus();
 	};
 
 	render() {
 		//Go and get states of searchTerm and gif
 		const {searchTerm, gifs} = this.state;
-		//Here we set up a variable to check if the gifs array has any results inside
+		//hasResults tells us how many gifs we have inside the gifs state array
 		const hasResults = gifs.length;
 
 		return(
 			<div className="page">
-				{/* I think we have to pass the state to the component using it
-				This is how to pass properties individually as opposed to all with keyword props */}
+				{/* Pass individual props to Header component.
+				clearSearch is a function and hasResults is a constant. */}
 				<Header clearSearch={this.clearSearch} hasResults={hasResults} />
 				<div className="search grid">
 					{/* Our stack of gif images */}
-					{/* Only display video if there is a gif in the state.
-					Apparently we can test for it by using &&.
-					I'm confused why this isn't a ternary operator.
-					How does just writing gif imply that there is something there? */}
+					{/* Only display video if there is a gif in the state.*/}
 					{/* Get video source from gif state */}
-					{/*{gif && <video
-						className="grid-item video"
-						autoPlay
-						loop
-						src={gif.images.original.mp4}
-					/>}*/}
-
-					{/* Code above updated to code below.
-					Here we loop over our array of gif images, using map()
-					and create multiple videos from it */}
+					{/* Here we loop over our array of gif images, using map()
+					and create multiple video elements from it */}
 					{this.state.gifs.map(gif => (
 						//Insert Gif component and spread out properties
 						<Gif {...gif} />
 					))}
-					
-					{/* Look up refs in React Docs */}
 					<input
 						className="input grid-item"
 						placeholder="Type something"
@@ -201,7 +185,7 @@ class App extends Component {
 						ref={input => {this.textInput = input;}}
 					/>
 				</div>
-				{/* Get all state and 'spread it out'—I think this saves us passing each state individually. */}
+				{/* Spread state onto UserHint as attributes and value pairs. */}
 				<UserHint {...this.state} />
 			</div>
 			)
