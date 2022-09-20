@@ -95,10 +95,10 @@ class App extends Component {
 		catch (error) {
 			this.setState((prevState, props) => ({
 				...prevState,
-				//hintText will be equal to 'error'
-				hintText: error,
 				//Turn off loading spinner
-				loading: false
+				loading: false,
+				//hintText will be equal to the message inside the error object
+				hintText: error.message
 			}))
 			console.log(error);
 		}
