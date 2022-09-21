@@ -1,14 +1,14 @@
-## Intro
+# Intro
 
 This project was part of the SuperHi ReactJS course.
 
 During this project I learned how to:
+
 * fetch data from Giphy asyncronously
 * convert the data file to JSON
 * throw an error when the process fails
 * store the data in the state
 * access the data from a React component
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
