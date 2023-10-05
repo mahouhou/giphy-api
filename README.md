@@ -4,7 +4,7 @@
 
 This project was part of the SuperHi ReactJS course. The user can enter a search term, this will query the Giphy API and return a set of gifs that match the keyword. The user then either can hit enter to see another random matching gif, or hit clear and start again.
 
-View the live site (here)[https://mahouhou.github.io/giphy-api/].
+View the live site [here](https://mahouhou.github.io/giphy-api/).
 
 During this project I learned how to:
 
