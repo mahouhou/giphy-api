@@ -8,8 +8,8 @@ import clearButton from './images/close-icon.svg'
 //Function that will be used to choose a random gif
 //from the array of data
 const randomChoice = arr => {
-	const randIndex = Math.floor(Math.random() * arr.length);
-	return arr[randIndex];
+	const randIndex = Math.floor(Math.random() * arr.length)
+	return arr[randIndex]
 };
 
 //Pass clearSearch and hasResults props
@@ -23,7 +23,7 @@ const Header = ({clearSearch, hasResults}) => (
 			</button>) : (
 		 	<h1 className="title">Jiffy</h1>)}
 	</div>
-);
+)
 
 const UserHint = ({loading, hintText}) => (
 	<div className="user-hint">
@@ -45,7 +45,7 @@ class App extends Component {
 			hintText: '',
 			gifs: []
 
-		};
+		}
 	}
 
 	//Create a function that searches the Giphy API using fetch
@@ -63,7 +63,7 @@ class App extends Component {
 		try {
 			//Use await to wait for our response to come back
 			const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=mjtfKN8MvtF58EhlRaPKRe7u3QHpuH1q&q=${searchTerm}&limit=25&offset=0&rating=G&lang=en`);
-			//Convert data into JSON data
+			//Convert JSON data into a Javascript object
 			//const {data} gets the first key inside the response called data
 			const {data} = await response.json();
 
@@ -102,7 +102,7 @@ class App extends Component {
 			}))
 			console.log(error);
 		}
-	};
+	}
 
 
 	//With Create React App, we can write our methods as arrow functions
@@ -127,7 +127,7 @@ class App extends Component {
 			//If so, search for value, if not, stay blank
 			hintText: value.length > 2 ? `Hit enter to search ${value}` : ''
 		}));
-	};
+	}
 
 	//We must use handleKeyPress because 'Enter' is not a character we can type out
 	handleKeyPress = event => {
@@ -138,7 +138,7 @@ class App extends Component {
 			//Here we call our searchGiphy function using the value
 			this.searchGiphy(value);
 		}
-	};
+	}
 
 	//Called when user hits Clear button
 	clearSearch = () => {
@@ -153,7 +153,7 @@ class App extends Component {
 		//this refers to App textInput
 		//Focus cursor back on text input
 		this.textInput.focus();
-	};
+	}
 
 	render() {
 		//Go and get states of searchTerm and gif
@@ -192,4 +192,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default App

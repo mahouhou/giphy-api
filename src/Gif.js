@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 
 class Gif extends Component {
 	//Set the 'loaded' state for Gif as false by default
@@ -34,4 +34,4 @@ class Gif extends Component {
 }
 
 //Make this file available to other files that import it
-export default Gif;
+export default Gif
